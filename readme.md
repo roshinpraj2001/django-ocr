@@ -26,4 +26,3 @@ Convert PDFs page-by-page instead of loading whole document
 
 Lightweight Database (SQLite)
 
-<!-- Fast for read-heavy search queries -->

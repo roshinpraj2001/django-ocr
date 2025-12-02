@@ -22,14 +22,12 @@ class UploadDocument(APIView):
             mime_type=mime_type
         )
 
-        file_path = doc.file.path  # full path on disk
-        # If you need poppler_path on Windows, pass it here: poppler_path="C:\\path\\to\\poppler\\bin"
+        file_path = doc.file.path  
         try:
             ocr_text = extract_ocr_text(file_path)
             doc.ocr_text = ocr_text
             doc.save()
         except Exception as e:
-            # don't fail upload just because OCR had an issue
             return Response({"error": f"Uploaded but OCR failed: {str(e)}"}, status=500)
 
         return Response(DocumentSerializer(doc).data, status=201)
